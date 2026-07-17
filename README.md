@@ -21,8 +21,7 @@ classDiagram
         #string name_
         #double price_
         +product(string name, double price)
-        +~product() virtual
-        +calcular_calorias() double*
+        +calcular_calorias() double
         +exibir_info() void
         +get_name() string
         +get_price() double
@@ -31,87 +30,76 @@ classDiagram
 
     class promocionavel {
         <<interface>>
-        +calcular_preco_promocional(double porcentagem_desconto) double*
-        +elegivel_para_promocao() bool*
-        +~promocionavel() virtual
+        +calcular_preco_promocional(double porcentagem_desconto) double
+        +elegivel_para_promocao() bool
     }
 
     class alimento {
         -double calorias_
         -string categoria_
         +alimento(string name, double price, double calorias, string categoria)
-        +~alimento() override
-        +calcular_calorias() double override
-        +exibir_info() void override
-        +calcular_preco_promocional(double porcentagem_desconto) double override
-        +elegivel_para_promocao() bool override
+        +calcular_calorias() double
+        +exibir_info() void
+        +calcular_preco_promocional(double porcentagem_desconto) double
+        +elegivel_para_promocao() bool
     }
 
     class bebida {
         -int volume_ml_
         -bool tem_gas_
         +bebida(string name, double price, int volume_ml, bool tem_gas)
-        +~bebida() override
-        +calcular_calorias() double override final
-        +exibir_info() void override
-        +calcular_preco_promocional(double porcentagem_desconto) double override
-        +elegivel_para_promocao() bool override
+        +calcular_calorias() double
+        +exibir_info() void
+        +calcular_preco_promocional(double porcentagem_desconto) double
+        +elegivel_para_promocao() bool
     }
 
     class combo {
         <<final>>
-        -vector~reference_wrapper~const product~~ itens_
         -double porcentagem_desconto_
         +combo(string name, double porcentagem_desconto)
-        +~combo() override
-        +adicionar_produto(const product& p) void
-        +calcular_calorias() double override
-        +exibir_info() void override
-        +get_price() double override
+        +adicionar_produto(product p) void
+        +calcular_calorias() double
+        +exibir_info() void
+        +get_price() double
     }
 
     class customer {
         -string name_
         -string cpf_
         +customer(string name, string cpf)
-        +~customer()
         +get_name() string
         +get_cpf() string
         +is_valid_cpf() bool
     }
 
     class order_item {
-        -const product& product_
         -int quantity_
-        +order_item(const product& product_ref, int quantity)
-        +~order_item()
-        +get_product() const product&
+        +order_item(product product_ref, int quantity)
+        +get_product() product
         +get_quantity() int
         +calculate_subtotal() double
     }
 
     class order {
         -int id_
-        -const customer& customer_
-        -vector~unique_ptr~order_item~~ items_
-        +order(int id, const customer& customer_ref)
-        +~order()
+        +order(int id, customer customer_ref)
         +get_id() int
-        +get_customer() const customer&
-        +add_item(const product& product_ref, int quantity) void
+        +get_customer() customer
+        +add_item(product product_ref, int quantity) void
         +calculate_total() double
         +print_summary() void
     }
 
-    product <|-- alimento : herança
-    product <|-- bebida : herança
-    product <|-- combo : herança
-    promocionavel <|.. alimento : implementa
-    promocionavel <|.. bebida : implementa
-    order "1" *-- "1..*" order_item : composição
-    order "1" o-- "1" customer : agregação
-    order_item "1" o-- "1" product : agregação
-    combo "1" o-- "0..*" product : agregação
+    product <|-- alimento
+    product <|-- bebida
+    product <|-- combo
+    promocionavel <|.. alimento
+    promocionavel <|.. bebida
+    order "1" *-- "1..*" order_item
+    order "1" o-- "1" customer
+    order_item "1" o-- "1" product
+    combo "1" o-- "0..*" product
 ```
 
 ## Justificativa das relações
