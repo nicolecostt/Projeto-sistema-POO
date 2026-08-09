@@ -1,5 +1,7 @@
 #include "order.hpp"
 
+#include "domain_errors.hpp"
+
 #include <iomanip>
 #include <iostream>
 
@@ -22,9 +24,8 @@ const customer& order::get_customer() const {
 
 void order::add_item(const product& product_ref, int quantity) {
     if (quantity <= 0) {
-        std::cout << "Quantidade invalida para o produto \""
-                  << product_ref.get_name() << "\"\n";
-        return;
+        throw invalid_quantity_error(
+            "quantity for " + product_ref.get_name() + " must be positive");
     }
 
     items_.push_back(std::make_unique<order_item>(product_ref, quantity));
