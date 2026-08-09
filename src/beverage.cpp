@@ -26,6 +26,18 @@ void bebida::exibir_info() const {
               << " | Calorias: " << calcular_calorias() << " kcal\n";
 }
 
+std::string bebida::type_name() const {
+    return "beverage";
+}
+
+int bebida::get_volume_ml() const {
+    return volume_ml_;
+}
+
+bool bebida::has_gas() const {
+    return tem_gas_;
+}
+
 double bebida::calcular_preco_promocional(double porcentagem_desconto) const {
     return apply_discount(porcentagem_desconto);
 }

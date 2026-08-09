@@ -16,6 +16,7 @@ public:
 
     virtual double calcular_calorias() const = 0;
     virtual void exibir_info() const;
+    virtual std::string type_name() const = 0;
 
     std::string get_name() const;
     virtual double get_price() const;

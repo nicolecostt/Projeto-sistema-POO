@@ -21,6 +21,18 @@ void alimento::exibir_info() const {
               << " | Calorias: " << calorias_ << " kcal\n";
 }
 
+std::string alimento::type_name() const {
+    return "food";
+}
+
+double alimento::get_calories() const {
+    return calorias_;
+}
+
+std::string alimento::get_category() const {
+    return categoria_;
+}
+
 double alimento::calcular_preco_promocional(double porcentagem_desconto) const {
     return apply_discount(porcentagem_desconto);
 }

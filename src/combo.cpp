@@ -35,6 +35,18 @@ void combo::exibir_info() const {
     std::cout << "  Calorias totais: " << calcular_calorias() << " kcal\n";
 }
 
+std::string combo::type_name() const {
+    return "combo";
+}
+
 double combo::get_price() const {
     return price_ - (price_ * porcentagem_desconto_ / 100.0);
+}
+
+double combo::get_discount_percent() const {
+    return porcentagem_desconto_;
+}
+
+const std::vector<std::reference_wrapper<const product>>& combo::get_items() const {
+    return itens_;
 }
