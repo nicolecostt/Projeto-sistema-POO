@@ -12,9 +12,6 @@
 
 using Catch::Approx;
 
-static bool alimento_destrutor_chamado = false;
-static bool bebida_destrutor_chamado = false;
-
 TEST_CASE("Destruicao em cadeia executada corretamente", "[hierarquia]") {
     SECTION("Destrutor virtual funciona com alimento") {
         product* p = new alimento("Teste Burger", 10.0, 500, "lanche");
